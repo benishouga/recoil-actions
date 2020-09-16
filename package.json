@@ -1,0 +1,97 @@
+{
+  "name": "recoil-actions",
+  "description": "TODO",
+  "keywords": [
+    "recoil-actions",
+    "react",
+    "recoil",
+    "hooks",
+    "context",
+    "store",
+    "state"
+  ],
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": {
+    "name": "Akito Moriki",
+    "email": "benishouga@gmail.com",
+    "url": "https://github.com/benishouga/"
+  },
+  "main": "lib/recoil-actions.js",
+  "unpkg": "umd/recoil-actions.js",
+  "module": "es/recoil-actions.js",
+  "types": "lib/recoil-actions.d.ts",
+  "files": [
+    "es",
+    "lib",
+    "umd"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benishouga/recoil-actions.git"
+  },
+  "bugs": "https://github.com/benishouga/recoil-actions/issues",
+  "homepage": "https://github.com/benishouga/recoil-actions",
+  "scripts": {
+    "clean": "rimraf coverage es lib umd docs/**/*.js",
+    "prepare": "npm run clean && npm run compile && npm run lint && npm run test && npm run build && npm run docs",
+    "compile": "tsc --noEmit",
+    "lint": "eslint --ext=ts,tsx --fix src",
+    "build": "rollup -c",
+    "start": "webpack-dev-server --hot --watch-content-base --content-base docs/ --open ",
+    "docs": "webpack --mode=production",
+    "test": "cross-env NODE_ENV=test jest --coverage",
+    "format": "prettier -w src/**/*"
+  },
+  "peerDependencies": {
+    "recoil": "^0.0.11"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "5.11.4",
+    "@testing-library/react": "11.0.4",
+    "@types/jest": "26.0.13",
+    "@types/react": "16.9.49",
+    "@types/react-dom": "16.9.8",
+    "@types/react-syntax-highlighter": "11.0.5",
+    "@types/recoil": "0.0.1",
+    "@typescript-eslint/eslint-plugin": "4.1.1",
+    "@typescript-eslint/parser": "4.1.1",
+    "cross-env": "7.0.2",
+    "eslint": "7.9.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-jest": "24.0.1",
+    "eslint-plugin-prettier": "3.1.4",
+    "eslint-plugin-react": "7.20.6",
+    "eslint-plugin-react-hooks": "4.1.2",
+    "jest": "26.4.2",
+    "prettier": "2.1.1",
+    "raw-loader": "4.0.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-syntax-highlighter": "13.5.3",
+    "recoil": "0.0.11",
+    "rimraf": "3.0.2",
+    "rollup": "2.26.11",
+    "rollup-plugin-terser": "7.0.2",
+    "rollup-plugin-typescript2": "0.27.2",
+    "ts-jest": "26.3.0",
+    "ts-loader": "8.0.3",
+    "typescript": "4.0.2",
+    "webpack": "4.44.1",
+    "webpack-cli": "3.3.12",
+    "webpack-dev-server": "3.11.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "coverageThreshold": {
+      "global": {
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
+      }
+    }
+  }
+}
