@@ -2,23 +2,41 @@
 
 ![GITHUB-BADGE](https://github.com/benishouga/recoil-actions/workflows/Node.js%20CI/badge.svg)
 
-This library for Context API of React Hooks. Easily create a context with a state and an action to update it.
+This library makes it easy to change state when using [Facebook's Recoil](https://github.com/facebookexperimental/Recoil).
 
 ## Installation
 
 Requires React 16.8.3 or later.
 
 ```
-npm install recoil-actions
+npm install recoil recoil-actions
 ```
 
 ## Concept
 
-TODO
+This library makes it easy to define `Actions` (It is a Reducers in Redux) to change the State.
+
+- Easy to implement with less code.
+- Easy to create async action and async generator actions. (I think it's like rudx-saga.)
+- Easy to test. (Only test a stateless implementation.)
+- TypeScript friendry. (Strict type checking.)
 
 ## Steps to use
 
-TODO
+1. Define `State`. (Only when using TypeScript.)
+   ```ts
+   type CounterState = { count: number };
+   ```
+2. Define `actions` that takes `State` as the first argument and returns `State`.
+   ```ts
+   const actions = {
+     increment: (state: CounterState, amount: number) => ({ ...state, count: state.count + amount }),
+   };
+   ```
+3. `connect(atom).to(actions)` to get a function object that can be used as Hooks.
+   ```ts
+   const useActions = connect(atom).to(actions);
+   ```
 
 ## Examples
 
@@ -31,7 +49,8 @@ TODO
 
 ## Limitation
 
-TODO
+- Any action in the same context is executed sequentially.
+  - When processing in parallel, process them together outside the context or within the context.
 
 ## Contributions
 
