@@ -1,15 +1,15 @@
 import React from 'react';
-import { TodoProvider } from './TodoProvider';
+import { RecoilRoot } from 'recoil';
 import { AdditionalForm } from './AdditionalForm';
 import { TodoList } from './TodoList';
 
 const TodoApp = () => {
   return (
-    <TodoProvider>
+    <RecoilRoot>
       <p>TodoApp</p>
       <AdditionalForm />
       <TodoList />
-    </TodoProvider>
+    </RecoilRoot>
   );
 };
 

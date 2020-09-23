@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { atom, useRecoilValue, RecoilRoot } from 'recoil';
 import { connect } from '../../src/recoil-actions';
 import { wait } from '../wait';
-import { atom, useRecoilValue, RecoilRoot } from 'recoil';
 
 type State = { text: string; error: string; requesting: boolean };
 

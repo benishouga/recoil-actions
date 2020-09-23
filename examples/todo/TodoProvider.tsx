@@ -1,7 +1,6 @@
-import React from 'react';
+import { atom } from 'recoil';
 import { wait } from '../wait';
 import { connect } from '../../src/recoil-actions';
-import { atom, RecoilRoot } from 'recoil';
 
 export interface Todo {
   text: string;
@@ -45,4 +44,3 @@ export const appState = atom<TodoState>({
   default: { todos: [], progress: false },
 });
 export const useActions = connect(appState).to(new Actions());
-export const TodoProvider = ({ children }: { children: React.ReactNode }) => <RecoilRoot>{children}</RecoilRoot>;

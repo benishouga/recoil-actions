@@ -1,6 +1,6 @@
 import React from 'react';
-import { Todo, useActions, appState } from './TodoProvider';
 import { useRecoilValue } from 'recoil';
+import { Todo, useActions, appState } from './TodoProvider';
 
 export const TodoList = () => {
   const { todos, progress } = useRecoilValue(appState);

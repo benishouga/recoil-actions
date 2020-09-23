@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useActions, appState } from './TodoProvider';
 import { useRecoilValue } from 'recoil';
+import { useActions, appState } from './TodoProvider';
 
 export const AdditionalForm = () => {
   const { progress } = useRecoilValue(appState);

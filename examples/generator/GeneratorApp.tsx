@@ -1,7 +1,7 @@
 import React from 'react';
+import { atom, useRecoilValue, RecoilRoot } from 'recoil';
 import { wait } from '../wait';
 import { connect } from '../../src/recoil-actions';
-import { atom, useRecoilValue, RecoilRoot } from 'recoil';
 
 type State = { count: number; lock: boolean };
 
