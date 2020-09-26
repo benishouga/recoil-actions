@@ -23,20 +23,18 @@ This library makes it easy to define `Actions` (It is a Reducers in Redux) to ch
 
 ## Steps to use
 
-1. Define `State`. (Only when using TypeScript.)
+1. Define `atom`.
    ```ts
-   type CounterState = { count: number };
+   const appState = atom<number>({ key: 'state', default: 0 });
    ```
-2. Define `actions` that takes `State` as the first argument and returns `State`.
+2. `connect(atom).to(reducers)` to get a function object that can be used as Hooks. 
    ```ts
-   const actions = {
-     increment: (state: CounterState, amount: number) => ({ ...state, count: state.count + amount }),
-   };
+   const useActions = connect(atom).to({
+     increment: (state, amount) => state + amount,
+     decrement: (state, amount) => state - amount
+   });
    ```
-3. `connect(atom).to(actions)` to get a function object that can be used as Hooks.
-   ```ts
-   const useActions = connect(atom).to(actions);
-   ```
+3. コンポートで useActions から Action を取得し使用することで、State の更新を行うことができます。
 
 ## Examples
 
@@ -45,7 +43,28 @@ https://benishouga.github.io/recoil-actions/
 
 ## API
 
-TODO
+### connect - to
+
+```tsx
+import { atom } from 'recoil';
+import { connect } from 'recoil-actions';
+
+const appState = atom<number>({ key: 'AppState', default: 0 });
+const useActions = connect(appState).to({
+  increment: (state, amount: number) => state + amount,
+});
+
+const SomeComponent = () => {
+   const { increment } = useActions();
+   return <button onClick={() => increment(1)}>button<button>
+};
+```
+
+### connectFamily - to
+
+```
+
+```
 
 ## Limitation
 
