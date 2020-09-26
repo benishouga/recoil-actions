@@ -2,8 +2,8 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
-import { connect } from './recoil-actions';
-import { atom, useRecoilValue, RecoilRoot } from 'recoil';
+import { connect, connectFamily } from './recoil-actions';
+import { atom, useRecoilValue, RecoilRoot, atomFamily } from 'recoil';
 
 const wait10 = async () => new Promise((resolve) => setTimeout(resolve, 10));
 
@@ -242,6 +242,53 @@ describe('recoil-actions', () => {
       expect(await findByText('count is 4')).toBeDefined();
       expect(await findByText('count is 5')).toBeDefined();
       expect(await findByText('count is 6')).toBeDefined();
+    });
+  });
+
+  describe('use atom family', () => {
+    type State = { count: number };
+    const appStateFamily = atomFamily<State, string>({
+      key: 'use atom family',
+      default: { count: 0 },
+    });
+    const useActions = connectFamily(appStateFamily).to({
+      increment: (state, amount: number) => ({ count: state.count + amount }),
+      doNothing: () => {},
+    });
+
+    const IncrementButton = ({ id }: { id: string }) => {
+      const { increment } = useActions(id);
+      return <button onClick={() => increment(1)}>button {id}</button>;
+    };
+
+    const Display = ({ id }: { id: string }) => {
+      const { count } = useRecoilValue(appStateFamily(id));
+      return (
+        <span>
+          count {id} is {count}
+        </span>
+      );
+    };
+
+    test('Update the State with atom-family using an action.', async () => {
+      const { getByText, findByText, debug, getByTestId, findByTestId } = render(
+        <div data-testid="base">
+          <RecoilRoot>
+            <IncrementButton id="A" />
+            <Display id="A" />
+            <IncrementButton id="B" />
+            <Display id="B" />
+          </RecoilRoot>
+        </div>
+      );
+      expect(getByText('count A is 0')).toBeInTheDocument();
+      expect(getByText('count B is 0')).toBeInTheDocument();
+      fireEvent.click(getByText('button A'));
+      expect(await findByText('count A is 1')).toBeInTheDocument();
+      expect(await findByText('count B is 0')).toBeInTheDocument();
+      fireEvent.click(getByText('button B'));
+      expect(await findByText('count A is 1')).toBeInTheDocument();
+      expect(await findByText('count B is 1')).toBeInTheDocument();
     });
   });
 });

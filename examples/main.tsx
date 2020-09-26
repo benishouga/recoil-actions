@@ -7,6 +7,7 @@ import { MinimumApp } from './minimum/MinimumApp';
 import { ClassBasedApp } from './class-based/ClassBasedApp';
 import { CodePreviewer } from './CodePreviewer';
 import { AbortableApp } from './abortable/AbortableApp';
+import { AtomFamilyApp } from './atomFamily/AtomFamilyApp';
 
 ReactDOM.render(
   <>
@@ -17,6 +18,9 @@ ReactDOM.render(
     <hr />
     <ClassBasedApp />
     <CodePreviewer name="ClassBasedApp.tsx" code={require('!!raw-loader!./class-based/ClassBasedApp.tsx').default} />
+    <hr />
+    <AtomFamilyApp />
+    <CodePreviewer name="AtomFamilyApp.tsx" code={require('!!raw-loader!./atomFamily/AtomFamilyApp.tsx').default} />
     <hr />
     <AsyncApp />
     <CodePreviewer name="AsyncApp.tsx" code={require('!!raw-loader!./async/AsyncApp.tsx').default} />
